@@ -28,6 +28,7 @@ class User(models.Model):
         db_table = 'usuario'
         ordering = ['id'] 
         
+        
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -42,6 +43,7 @@ class Category(models.Model):
         ordering = ['id'] 
 
 
+
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
@@ -53,10 +55,26 @@ class Product(models.Model):
     sale_prace = models.DecimalField(default=0, decimal_places=0, max_digits=8)
     
     def __str__(self) -> str:
-        return self.nombre
+        return self.name
     
     class Meta:
-        verbose_name = 'servicio'
-        verbose_name_plural = 'servicios'
-        db_table = 'servicio'
+        verbose_name = 'producto'
+        verbose_name_plural = 'productos'
+        db_table = 'producto'
+        ordering = ['id'] 
+
+
+class Sale(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    creation_date = models.DateTimeField(auto_now_add=True, verbose_name='Tiempo de creación')
+    sale_date = models.DateTimeField(auto_now=True, verbose_name='Venta')
+    
+    def __str__(self) -> str:
+        return f'{self.user} {self.product}'
+    
+    class Meta:
+        verbose_name = 'venta'
+        verbose_name_plural = 'ventas'
+        db_table = 'venta'
         ordering = ['id'] 
