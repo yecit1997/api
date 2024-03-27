@@ -119,7 +119,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = ['static/']
+# STATICFILES_DIRS = ['static/']
 
 # Configuramos las carpetas demedia
 MEDIA_URL = 'media/'
